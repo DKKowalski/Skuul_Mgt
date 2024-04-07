@@ -16,7 +16,7 @@ export default function LoginForm() {
 
   useEffect(
     function () {
-      if (isAuthenticated) navigate("/dashboard");
+      if (isAuthenticated) navigate("/admin/dashboard");
     },
     [isAuthenticated, navigate]
   );
