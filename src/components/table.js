@@ -1,6 +1,6 @@
 import React from "react";
 
-const Table = ({ data, onDelete, onUpdate }) => {
+const Table = ({ data, columns, onDelete, onUpdate }) => {
   const handleDelete = (id) => {
     onDelete(id);
   };
@@ -14,18 +14,14 @@ const Table = ({ data, onDelete, onUpdate }) => {
       <table className="min-w-full bg-white font-[sans-serif]">
         <thead className="bg-gray-800 whitespace-nowrap">
           <tr>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-white">
-              Name
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-white">
-              Email
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-white">
-              Role
-            </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-white">
-              Joined At
-            </th>
+            {columns.map((column) => (
+              <th
+                key={column.key}
+                className="px-6 py-3 text-left text-sm font-semibold text-white"
+              >
+                {column.title}
+              </th>
+            ))}
             <th className="px-6 py-3 text-left text-sm font-semibold text-white">
               Actions
             </th>
@@ -34,10 +30,11 @@ const Table = ({ data, onDelete, onUpdate }) => {
         <tbody className="whitespace-nowrap divide-y divide-gray-200">
           {data.map((item) => (
             <tr key={item.id}>
-              <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{item.email}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{item.role}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{item.joinedAt}</td>
+              {columns.map((column) => (
+                <td key={column.key} className="px-6 py-4 whitespace-nowrap">
+                  {column.render ? column.render(item) : item[column.key]}
+                </td>
+              ))}
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
                   className="mr-4"

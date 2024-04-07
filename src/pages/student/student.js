@@ -52,6 +52,19 @@ const Student = () => {
       console.error("Error updating student: ", error);
     }
   };
+const columns = [
+  { key: "name", title: "Name" },
+  { key: "email", title: "Email" },
+  { key: "studentId", title: "Student ID" },
+  {
+    key: "joinedAt",
+    title: "Joined At",
+    render: (item) => (
+      <span>{new Date(item.joinedAt).toLocaleDateString()}</span>
+    ),
+  },
+];
+
 
   return (
     <div>
@@ -63,7 +76,7 @@ const Student = () => {
       </button>
       {loading ? (
         <Spinner /> // Render the spinner component while data is being fetched
-      ) : selectedStudent ? ( 
+      ) : selectedStudent ? (
         // Render the UpdateStudent component if a student is selected for editing
         <UpdateStudent
           studentData={selectedStudent}
@@ -72,6 +85,7 @@ const Student = () => {
       ) : (
         <Table
           data={students}
+          columns={columns}
           onUpdate={handleEditStudent} // Pass the edit handler to the Table component
           onDelete={handleDeleteStudent}
         />

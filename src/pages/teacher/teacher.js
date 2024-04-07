@@ -53,6 +53,20 @@ const Teacher = () => {
     }
   };
 
+ const columns = [
+   { key: "name", title: "Name" },
+   { key: "email", title: "Email" },
+   { key: "teacherId", title: "Teacher ID" },
+   {
+     key: "joinedAt",
+     title: "Joined At",
+     render: (item) => (
+       <span>{new Date(item.joinedAt).toLocaleDateString()}</span>
+     ),
+   },
+ ];
+
+
   return (
     <div>
       <button
@@ -71,6 +85,7 @@ const Teacher = () => {
         />
       ) : (
         <Table
+          columns={columns}
           data={teachers}
           onUpdate={handleEditTeacher} // Pass the edit handler to the Table component
           onDelete={handleDeleteTeacher}

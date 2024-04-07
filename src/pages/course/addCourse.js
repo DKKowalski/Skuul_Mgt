@@ -4,7 +4,8 @@ import { createDocument } from "../../api/api";
 const AddCourse = () => {
   const [name, setName] = useState("");
   const [teacherId, setTeacherId] = useState("");
-  const [classId, setClassId] = useState("");
+  const [courseId, setCourseId] = useState("");
+  const [description, setDescription] = useState("");
 
   // Function to handle form submission
   const handleSubmit = async () => {
@@ -13,9 +14,9 @@ const AddCourse = () => {
       const courseData = {
         name,
         teacherId,
-        classId,
+        courseId,
+        description,
         createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       };
 
       // Call API function to create course document in Firestore
@@ -24,7 +25,8 @@ const AddCourse = () => {
       // Reset form fields after successful submission
       setName("");
       setTeacherId("");
-      setClassId("");
+      setCourseId("");
+      setDescription("");
 
       // Optionally, you can show a success message or perform other actions
       console.log("Course added successfully!");
@@ -60,8 +62,18 @@ const AddCourse = () => {
         <input
           type="text"
           placeholder="Enter class ID"
-          value={classId}
-          onChange={(e) => setClassId(e.target.value)}
+          value={courseId}
+          onChange={(e) => setCourseId(e.target.value)}
+          className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
+        />
+      </div>
+      <div className="flex items-center">
+        <label className="text-gray-400 w-36 text-sm">Class ID</label>
+        <input
+          type="text"
+          placeholder="Enter course desc"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
         />
       </div>

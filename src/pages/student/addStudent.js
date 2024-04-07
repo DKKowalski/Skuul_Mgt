@@ -1,20 +1,37 @@
-import React, { useState } from "react";
-import { createDocument } from "../../api/api";
+import React, { useState, useEffect } from "react";
+import { createDocument, getDocuments } from "../../api/api";
 
 const AddStudent = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [studentId, setStudentId] = useState("");
+  const [courses, setCourses] = useState([]);
+  const [allCourses, setAllCourses] = useState([]);
+
+  // Fetch all courses when component mounts
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const courses = await getDocuments("courses");
+        setAllCourses(courses);
+      } catch (error) {
+        console.error("Error fetching courses: ", error);
+      }
+    };
+    fetchCourses();
+  }, []);
 
   // Function to handle form submission
   const handleSubmit = async () => {
     try {
       // Create student data object
       const studentData = {
+        studentId,
+        courses,
         name,
         email,
         password,
-        role: "Student",
         joinedAt: new Date().toISOString(),
       };
 
@@ -25,6 +42,8 @@ const AddStudent = () => {
       setName("");
       setEmail("");
       setPassword("");
+      setStudentId("");
+      setCourses([]);
 
       // Optionally, you can show a success message or perform other actions
       console.log("Student added successfully!");
@@ -64,6 +83,35 @@ const AddStudent = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
         />
+      </div>
+      <div className="flex items-center">
+        <label className="text-gray-400 w-36 text-sm">Student ID</label>
+        <input
+          type="text"
+          placeholder="Enter student's ID"
+          value={studentId}
+          onChange={(e) => setStudentId(e.target.value)}
+          className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
+        />
+      </div>
+      <div className="flex items-center">
+        <label className="text-gray-400 w-36 text-sm">Courses</label>
+        <select
+          multiple
+          value={courses}
+          onChange={(e) =>
+            setCourses(
+              Array.from(e.target.selectedOptions, (option) => option.value)
+            )
+          }
+          className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
+        >
+          {allCourses.map((course) => (
+            <option key={course.id} value={course.id}>
+              {course.name}
+            </option>
+          ))}
+        </select>
       </div>
       <button
         type="button"

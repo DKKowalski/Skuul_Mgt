@@ -4,7 +4,7 @@ import Main from "./pages/Main";
 import Teacher from "./pages/teacher/teacher";
 import PageNotFound from "./pages/PageNotFound";
 import { AuthProvider } from "./authentication/authContext";
-import ProtectedRoute from "./authentication/ProtectedRoute";
+import AdminProtectedRoutee from "./authentication/AdminProtectedRoute";
 import Course from "./pages/course/course";
 import Student from "./pages/student/student";
 import Dashboard from "./pages/dashboard/dashboard";
@@ -24,9 +24,9 @@ function App() {
           <Route
             path="/admin"
             element={
-              <ProtectedRoute>
+              <AdminProtectedRoutee>
                 <Main />
-              </ProtectedRoute>
+              </AdminProtectedRoutee>
             }
           >
             <Route path="dashboard" element={<Dashboard />} />
