@@ -10,6 +10,10 @@ import Student from "./pages/student/student";
 import Dashboard from "./pages/dashboard/dashboard";
 import AddStudent from "./pages/student/addStudent";
 import StudentMain from "./pages/student";
+import TeacherMain from "./pages/teacher";
+import AddTeacher from "./pages/teacher/addTeacher";
+import CourseMain from "./pages/course";
+import AddCourse from "./pages/course/addCourse";
 
 function App() {
   return (
@@ -26,12 +30,18 @@ function App() {
             }
           >
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="teachers" element={<Teacher />} />
-            <Route path="students" element={<StudentMain />}>
-              <Route path="add" element={<AddStudent />} />
-              <Route index element={<Student />} />
+            <Route path="teachers" element={<TeacherMain />}>
+              <Route index element={<Teacher />} />
+              <Route path="add" element={<AddTeacher />} />
             </Route>
-            <Route path="courses" element={<Course />} />
+            <Route path="students" element={<StudentMain />}>
+              <Route index element={<Student />} />
+              <Route path="add" element={<AddStudent />} />
+            </Route>
+            <Route path="courses" element={<CourseMain />}>
+              <Route index element={<Course />} />
+              <Route path="add" element={<AddCourse />} />
+            </Route>
           </Route>
           /
           <Route path="*" element={<PageNotFound />} />

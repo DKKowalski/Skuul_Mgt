@@ -5,7 +5,7 @@ const UpdateStudent = ({ studentData, onUpdate }) => {
   const [name, setName] = useState(studentData.name);
   const [email, setEmail] = useState(studentData.email);
   const [password, setPassword] = useState(studentData.password);
-
+ console.log(studentData);
   // Function to handle form submission
   const handleSubmit = async () => {
     try {
@@ -16,7 +16,7 @@ const UpdateStudent = ({ studentData, onUpdate }) => {
         email,
         password,
       };
-
+     
       // Call API function to update student document in Firestore
       await updateDocument("students", studentData.id, updatedStudentData);
 

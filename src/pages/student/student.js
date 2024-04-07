@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import UpdateStudent from "./updateStudent"; // Import the UpdateStudent component
 import Spinner from "../../components/Spinner"; // Import the Spinner component
 
-const StudentList = () => {
+const Student = () => {
   const [students, setStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [loading, setLoading] = useState(true); // State to track loading status
@@ -57,13 +57,13 @@ const StudentList = () => {
     <div>
       <button
         type="button"
-        class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+        className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
       >
         <Link to="add">Add student</Link>
       </button>
       {loading ? (
         <Spinner /> // Render the spinner component while data is being fetched
-      ) : selectedStudent ? (
+      ) : selectedStudent ? ( 
         // Render the UpdateStudent component if a student is selected for editing
         <UpdateStudent
           studentData={selectedStudent}
@@ -80,4 +80,4 @@ const StudentList = () => {
   );
 };
 
-export default StudentList;
+export default Student;

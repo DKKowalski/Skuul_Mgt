@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import { updateDocument } from "../../api/api";
 
-const UpdateTeacher = ({ teacherData, onUpdate }) => {
-  const [name, setName] = useState(teacherData.name);
-  const [email, setEmail] = useState(teacherData.email);
-  const [password, setPassword] = useState(teacherData.password);
+const UpdateCourse = ({ courseData, onUpdate }) => {
+  const [name, setName] = useState(courseData.name);
+  const [teacherId, setTeacherId] = useState(courseData.teacherId);
+  const [classId, setClassId] = useState(courseData.classId);
 
   // Function to handle form submission
   const handleSubmit = async () => {
     try {
-      // Update teacher data object
-      const updatedTeacherData = {
-        ...teacherData, // Retain existing fields
+      // Update course data object
+      const updatedCourseData = {
+        ...courseData, // Retain existing fields
         name,
-        email,
-        password,
+        teacherId,
+        classId,
       };
-      console.log(teacherData.id);
-      // Call API function to update teacher document in Firestore
-      await updateDocument("teachers", teacherData.id, updatedTeacherData);
+
+      // Call API function to update course document in Firestore
+      await updateDocument("courses", courseData.id, updatedCourseData);
 
       // Call the onUpdate function passed from the parent component
-      onUpdate(updatedTeacherData);
+      onUpdate(updatedCourseData);
 
       // Optionally, you can show a success message or perform other actions
-      console.log("Teacher updated successfully!");
+      console.log("Course updated successfully!");
     } catch (error) {
-      console.error("Error updating teacher: ", error);
+      console.error("Error updating course: ", error);
     }
   };
 
@@ -36,29 +36,29 @@ const UpdateTeacher = ({ teacherData, onUpdate }) => {
         <label className="text-gray-400 w-36 text-sm">Name</label>
         <input
           type="text"
-          placeholder="Enter teacher's name"
+          placeholder="Enter course name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
         />
       </div>
       <div className="flex items-center">
-        <label className="text-gray-400 w-36 text-sm">Email</label>
+        <label className="text-gray-400 w-36 text-sm">Teacher ID</label>
         <input
-          type="email"
-          placeholder="Enter teacher's email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          placeholder="Enter teacher ID"
+          value={teacherId}
+          onChange={(e) => setTeacherId(e.target.value)}
           className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
         />
       </div>
       <div className="flex items-center">
-        <label className="text-gray-400 w-36 text-sm">Password</label>
+        <label className="text-gray-400 w-36 text-sm">Class ID</label>
         <input
-          type="password"
-          placeholder="Enter teacher's password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          type="text"
+          placeholder="Enter class ID"
+          value={classId}
+          onChange={(e) => setClassId(e.target.value)}
           className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
         />
       </div>
@@ -73,4 +73,4 @@ const UpdateTeacher = ({ teacherData, onUpdate }) => {
   );
 };
 
-export default UpdateTeacher;
+export default UpdateCourse;
