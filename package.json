@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts --env=production build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "tailwind-dev": "npx tailwindcss -i ./src/input.css -o ./src/index.css --watch"
