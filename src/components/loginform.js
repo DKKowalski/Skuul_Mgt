@@ -38,7 +38,10 @@ export default function LoginForm() {
     <>
       {successMessage && <Message type="success" message={successMessage} />}
       {errorMessage && <Message type="error" message={errorMessage} />}
-      <div className="relative top-40 font-[sans-serif] w-max mx-auto">
+      <h1  className=" text-center  text-4xl font-extrabold leading-none tracking-tight text-[#1E2772] md:text-5xl lg:text-6xl dark:text-[#1E2772]">
+        Sukuul Management System
+      </h1>
+      <div className="relative top-40 mb-40 font-[sans-serif] w-max mx-auto">
         <p className="text-center p-2 font-sans font-bold">Login As:</p>
         <div className="relative flex items-center">
           <select
@@ -52,7 +55,7 @@ export default function LoginForm() {
           </select>
         </div>
       </div>
-      <div className="bg-white font-[sans-serif] text-[#333] min-h-screen flex flex-col items-center justify-center py-6 px-4">
+      <div className="bg-white font-[sans-serif] text-[#333] min-h flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full border p-8 rounded-md bg-gray-200">
           <div className="text-center">
             <svg
