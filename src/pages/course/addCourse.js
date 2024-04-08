@@ -58,17 +58,17 @@ const AddCourse = () => {
         />
       </div>
       <div className="flex items-center">
-        <label className="text-gray-400 w-36 text-sm">Class ID</label>
+        <label className="text-gray-400 w-36 text-sm">Course ID</label>
         <input
           type="text"
-          placeholder="Enter class ID"
+          placeholder="Enter Course ID"
           value={courseId}
           onChange={(e) => setCourseId(e.target.value)}
           className="px-2 py-2 w-full border-b-2 focus:border-[#333] outline-none text-sm bg-white"
         />
       </div>
       <div className="flex items-center">
-        <label className="text-gray-400 w-36 text-sm">Class ID</label>
+        <label className="text-gray-400 w-36 text-sm">Course Description</label>
         <input
           type="text"
           placeholder="Enter course desc"

@@ -85,7 +85,7 @@ const AddTeacher = () => {
         />
       </div>
       <div className="flex items-center">
-        <label className="text-gray-400 w-36 text-sm">TeAacher ID</label>
+        <label className="text-gray-400 w-36 text-sm">Teacher ID</label>
         <input
           type="text"
           placeholder="Enter teacher's ID"

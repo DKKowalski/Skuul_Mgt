@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../authentication/authContext";
 import { useNavigate } from "react-router-dom";
+import Message from "./../components/message";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("admins");
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password) login(userType, email, password);
+    if (email && password) {
+      login(userType, email, password)
+        .then(() => {
+          setSuccessMessage("Login successful!"); // Set success message
+          setErrorMessage(""); // Clear error message
+        })
+        .catch((error) => {
+          setErrorMessage(error.message); // Set error message
+          setSuccessMessage(""); // Clear success message
+        });
+    }
   };
 
   useEffect(
@@ -23,8 +36,10 @@ export default function LoginForm() {
   );
   return (
     <>
+      {successMessage && <Message type="success" message={successMessage} />}
+      {errorMessage && <Message type="error" message={errorMessage} />}
       <div className="relative top-40 font-[sans-serif] w-max mx-auto">
-        <p className="text-center p-2 mb-10 font-sans font-bold">Login As:</p>
+        <p className="text-center p-2 font-sans font-bold">Login As:</p>
         <div className="relative flex items-center">
           <select
             className="w-full text-sm bg-white border-2 border-[#1E2772] focus:border-[#1E2772] px-4 py-3 rounded-md outline-none"
